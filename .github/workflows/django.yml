@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
       - name: Add secret
         run: |
-          export SECRET_KEY = ${{ secrets.SECRET_DJANGO }}
+          export SECRET_KEY='${{ secrets.SECRET_DJANGO }}'
       - name: Run Tests
         run: |
           python manage.py test
