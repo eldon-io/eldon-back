@@ -22,12 +22,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Add secret
-        run: |
-          export SECRET_KEY='${{ secrets.SECRET_DJANGO }}'
       - name: Run Tests
         run: |
-          python manage.py test
+          export SECRET_KEY='${{ secrets.SECRET_DJANGO }}' && python manage.py test
+
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
