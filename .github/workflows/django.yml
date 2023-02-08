@@ -41,9 +41,8 @@ jobs:
           port: 22
           script: |
             cd ${{ secrets.PATH }}
-            git pull origin deploy
-            git status
-            sudo yarn install
-            sudo yarn build
-            sudo pm2 delete all
-            sudo pm2 start yarn --name test -- start
+            sudo pkill gunicorn
+            source ../venv/bin/activate
+            git pull
+            pip install -r requirements.txt
+            export SECRET_DJANGO='${{ secrets.SECRET_DJANGO }}' && gunicorn eldonback.wsgi --bind 0.0.0.0:8000 -D
