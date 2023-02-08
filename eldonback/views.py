@@ -27,4 +27,4 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 
 def index(request):
-    return JsonResponse({"text": "Just rendering some JSON for test GITAPI:)"})
+    return JsonResponse({"text": "Just rendering some JSON for test TestCICD:)"})
