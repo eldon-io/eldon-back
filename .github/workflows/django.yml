@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests
         run: |
-          export SECRET_KEY='${{ secrets.SECRET_DJANGO }}' && python manage.py test
+          export SECRET_DJANGO='${{ secrets.SECRET_DJANGO }}' && python manage.py test
 
   deploy:
     # The type of runner that the job will run on
