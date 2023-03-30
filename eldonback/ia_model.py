@@ -85,9 +85,9 @@ def Model_randomForest(dataset, k, y_to_predict):
 def Model_GPT3(y_to_predict):
     openai.api_key = secret.SECRET_KEY_OPEN_AI
     response = openai.Completion.create(
-        model="text-davinci-003",
+        model="text-babbage-003",
         prompt="Classify the following text as either positive or negative: \n"+ x_test.iloc[i] +"\nCategory:")
-    response = response.choices[0].text
+    response = response.choices[0].text.lower()
     if("positiv" in response):
       response = "positive"
     elif ("negativ" in response):
@@ -96,9 +96,9 @@ def Model_GPT3(y_to_predict):
       response = "neutral"
     else:
       response = openai.Completion.create(
-        model="text-davinci-003",
+        model="text-babbage-003",
         prompt="Does " + response + " means 'positive', 'negative' or 'neutral' ?")
-      response = response.choices[0].text
+      response = response.choices[0].text.lower()
       if("positiv" in response):
         response = "positive"
       elif ("negativ" in response):
