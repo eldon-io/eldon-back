@@ -87,6 +87,26 @@ def Model_GPT3(y_to_predict):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt="Classify the following text as either positive or negative: \n"+ x_test.iloc[i] +"\nCategory:")
-    y_predicted = response.choices[0].text
+    response = response.choices[0].text
+    if("positiv" in response):
+      response = "positive"
+    elif ("negativ" in response):
+      reponse = "negative"
+    elif("neutral" in response):
+      response = "neutral"
+    else:
+      response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt="Does " + response + " means 'positive', 'negative' or 'neutral' ?")
+      response = response.choices[0].text
+      if("positiv" in response):
+        response = "positive"
+      elif ("negativ" in response):
+        reponse = "negative"
+      elif("neutral" in response):
+        response = "neutral"
+      else:
+        response = "error : " + response
+    y_predicted = response
     
     return y_predicted
