@@ -4,7 +4,7 @@ from rest_framework import permissions
 from eldonback.serializers import UserSerializer, GroupSerializer
 
 from django.http import JsonResponse
-
+from eldonback.ia_model import algorithm_gpt3
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -25,6 +25,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
 def index(request):
     return JsonResponse({"text": "Je fais unn changement pour le CI-CD"})
+
+def response_model(request, comment):
+    return JsonResponse({"result": str(algorithm_gpt3(comment))})

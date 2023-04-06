@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 #SECRET_DJANGO = os.getenv('SECRET_DJANGO')
 
@@ -27,10 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 import os
+from eldonback.secret import SECRET_DJANGO
 # ...
 
 try:
-    SECRET_KEY = os.environ["SECRET_DJANGO"]
+    # SECRET_KEY = os.environ["SECRET_DJANGO"]
+    SECRET_KEY = SECRET_DJANGO
+    
 except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY in environment") from e
     
