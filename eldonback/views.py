@@ -5,6 +5,7 @@ from eldonback.serializers import UserSerializer, GroupSerializer
 
 from django.http import JsonResponse
 from eldonback.ia_model import algorithm_gpt3
+import json
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -28,5 +29,22 @@ class GroupViewSet(viewsets.ModelViewSet):
 def index(request):
     return JsonResponse({"text": "Je fais unn changement pour le CI-CD"})
 
-def response_model(request, comment):
-    return JsonResponse({"result": str(algorithm_gpt3(comment))})
+def response_model(request):
+    response_ = []
+    
+    if request.method == 'POST':
+        data = json.loads(request.body) # On récupère le post
+        n = len(data['tweets'])
+    
+        for i in range(n):
+            text_ = data['tweets'][i]["text"]
+            id_ = data['tweets'][i]["id"]
+            result_ = algorithm_gpt3(text_)
+            
+            response_.append(
+                {
+                    "text" : text_,
+                    "id" : id_,
+                    "result" : result_ })
+        
+    return JsonResponse({"answer": response_})

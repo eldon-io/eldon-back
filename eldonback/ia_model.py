@@ -34,7 +34,6 @@ def traitement_prediction(prediction):
 
 ### Prédiction de la nature du message
 def algorithm_gpt3(x_to_classify):
-    x_to_classify = x_to_classify.replace("_", " ")
     openai.api_key = SECRET_KEY_OPEN_AI
     
     response = openai.Completion.create(
@@ -45,35 +44,3 @@ def algorithm_gpt3(x_to_classify):
     y_predicted = traitement_prediction(msg)
     
     return y_predicted
-
-'''
-######  Modèle GPT3
-def Model_GPT3(y_to_predict):
-    openai.api_key = secret.SECRET_KEY_OPEN_AI
-    response = openai.Completion.create(
-        model="text-babbage-003",
-        prompt="Classify the following text as either positive or negative: \n"+ x_test.iloc[i] +"\nCategory:")
-    response = response.choices[0].text.lower()
-    if("positiv" in response):
-      response = "positive"
-    elif ("negativ" in response):
-      reponse = "negative"
-    elif("neutral" in response):
-      response = "neutral"
-    else:
-      response = openai.Completion.create(
-        model="text-babbage-003",
-        prompt="Does " + response + " means 'positive', 'negative' or 'neutral' ?")
-      response = response.choices[0].text.lower()
-      if("positiv" in response):
-        response = "positive"
-      elif ("negativ" in response):
-        reponse = "negative"
-      elif("neutral" in response):
-        response = "neutral"
-      else:
-        response = "error : " + response
-    y_predicted = response
-    
-    return y_predicted
-'''
