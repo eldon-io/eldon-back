@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
 from eldonback.serializers import UserSerializer, GroupSerializer
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from eldonback.ia_model import algorithm_gpt3
 import json
@@ -29,6 +29,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 def index(request):
     return JsonResponse({"text": "Je fais unn changement pour le CI-CD"})
 
+@csrf_exempt
 def response_model(request):
     response_ = []
     
